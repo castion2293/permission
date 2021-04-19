@@ -1,0 +1,40 @@
+{
+  "name": "thoth-pharaoh/permission",
+  "description": "權限管理器",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "nick",
+      "email": "nick@ifalo.com.tw"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "ext-json": "*",
+    "illuminate/support": "^8.6"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pharaoh\\Permission\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Pharaoh\\Permission\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Pharaoh\\Permission\\PermissionServiceProvider"
+      ],
+      "aliases": {
+        "Permission": "Pharaoh\\Permission\\Facades\\Permission"
+      }
+    }
+  }
+}
