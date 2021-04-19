@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/castion2293/permission/compare/v1.0.2...v1.0.3) (2021-04-19)
+
+
+### Bug Fixes
+
+* test webhook([@nick](https://github.com/nick)) ([2d0f979](https://github.com/castion2293/permission/commit/2d0f97980358621da94abe5293df39daadf6382e))
+
 ### [1.0.2](https://github.com/castion2293/permission/compare/v1.0.1...v1.0.2) (2021-04-19)
 
 
