@@ -7,5 +7,6 @@ class ExampleTest extends BaseTestCase
     public function testExample()
     {
         $this->assertTrue(true);
+        $this->assertFalse(false);
     }
 }
