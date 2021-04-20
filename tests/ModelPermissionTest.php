@@ -95,4 +95,68 @@ class ModelPermissionTest extends BaseTestCase
         // Assert
         $this->assertEmpty($userPermissions);
     }
+
+    /**
+     * 測試 加入 管理群組
+     */
+    public function testUserAddGroup()
+    {
+        // Arrange
+        $group = Group::factory()->create()->toArray();
+
+        // Act
+        $this->user->addGroup($group['id']);
+
+        // Assert
+        $this->assertDatabaseHas(
+            'groupables',
+            [
+                'group_id' => $group['id'],
+                'groupable_id' => $this->user->id,
+                'groupable_type' => $this->user::class
+            ]
+        );
+    }
+
+    /**
+     * 測試 改變 管理群組
+     */
+    public function testUserChangeGroup()
+    {
+        // Arrange
+        $oldGroup = Group::factory()->create()->toArray();
+
+        DB::table('groupables')
+            ->insert(
+                [
+                    'group_id' => $oldGroup['id'],
+                    'groupable_id' => $this->user->id,
+                    'groupable_type' => User::class
+                ]
+            );
+
+        $newGroup = Group::factory()->create()->toArray();
+
+        // Act
+        $this->user->addGroup($newGroup['id']);
+
+        // Assert
+        $this->assertDatabaseHas(
+            'groupables',
+            [
+                'group_id' => $newGroup['id'],
+                'groupable_id' => $this->user->id,
+                'groupable_type' => $this->user::class
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            'groupables',
+            [
+                'group_id' => $oldGroup['id'],
+                'groupable_id' => $this->user->id,
+                'groupable_type' => $this->user::class
+            ]
+        );
+    }
 }

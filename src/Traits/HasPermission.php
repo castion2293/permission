@@ -26,4 +26,15 @@ trait HasPermission
             ->pluck('permission_key')
             ->toArray();
     }
+
+    /**
+     * 加入至管理權限群組
+     *
+     * @param int $groupId
+     */
+    public function addGroup(int $groupId)
+    {
+        $this->morphToMany(Group::class, 'groupable')
+            ->sync($groupId);
+    }
 }
