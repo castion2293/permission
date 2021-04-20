@@ -24,12 +24,21 @@ class ModelPermissionTest extends BaseTestCase
     }
 
     /**
-     * 測試User model 獲取權限
+     * 測試User model 獲取所有權限
      */
     public function testUserGetPermissions()
     {
         // Arrange
         $group = Group::factory()->create()->toArray();
+
+        DB::table('groupables')
+            ->insert(
+                [
+                    'group_id' => $group['id'],
+                    'groupable_id' => $this->user->id,
+                    'groupable_type' => User::class
+                ]
+            );
 
         $permissionKeys = [1101, 1102, 1103];
         $permissions = [];
@@ -41,6 +50,35 @@ class ModelPermissionTest extends BaseTestCase
                 ]
             )->toArray();
         }
+
+        // Act
+        $userPermissions = $this->user->getPermissions();
+
+        // Assert
+        $this->assertSame($permissionKeys, $userPermissions);
+    }
+
+    /**
+     * 測試 User model 沒有加入任何一個群組
+     */
+    public function testUserGetPermissionWithoutGroup()
+    {
+        // Arrange
+
+        // Act
+        $userPermissions = $this->user->getPermissions();
+
+        // Assert
+        $this->assertEmpty($userPermissions);
+    }
+
+    /**
+     * 測試 User model 管理群組裡沒有任何權限
+     */
+    public function testUserGetPermissionWithoutPermission()
+    {
+        // Arrange
+        $group = Group::factory()->create()->toArray();
 
         DB::table('groupables')
             ->insert(
@@ -55,6 +93,6 @@ class ModelPermissionTest extends BaseTestCase
         $userPermissions = $this->user->getPermissions();
 
         // Assert
-        $this->assertSame($permissionKeys, $userPermissions);
+        $this->assertEmpty($userPermissions);
     }
 }
