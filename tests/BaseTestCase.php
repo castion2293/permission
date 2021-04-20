@@ -160,18 +160,6 @@ class BaseTestCase extends TestCase
         if (file_exists(__DIR__ . '/../database/factories')) {
             $this->withFactories(__DIR__ . '/../database/factories');
         }
-
-        // 改變 storage_path 路徑至 /tests/storage/
-        app()->bind('path.storage', function () {
-            return __DIR__ . '/storage';
-        });
-
-        // 完成測試後 清除所建立的LOG檔
-        $this->beforeApplicationDestroyed(function () {
-            if (is_dir(storage_path('logs'))) {
-                shell_exec('rm -rf ' . storage_path('logs/'));
-            }
-        });
     }
 
     /**

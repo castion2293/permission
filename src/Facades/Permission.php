@@ -1,6 +1,6 @@
 <?php
 
-namespace Pharaoh\Permission\facades;
+namespace Pharaoh\Permission\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
