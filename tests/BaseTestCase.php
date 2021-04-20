@@ -135,6 +135,8 @@ class BaseTestCase extends TestCase
                 'NO_ENGINE_SUBSTITUTION'
             ],
         ]);
+
+        $app['config']->set('database.default', 'testing');
     }
 
     /**

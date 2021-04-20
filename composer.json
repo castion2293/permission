@@ -15,11 +15,13 @@
     "illuminate/support": "^8.6"
   },
   "require-dev": {
-    "orchestra/testbench": "^6.2"
+    "orchestra/testbench": "^6.2",
+    "laravel/legacy-factories": "^1.1"
   },
   "autoload": {
     "psr-4": {
-      "Pharaoh\\Permission\\": "src/"
+      "Pharaoh\\Permission\\": "src/",
+      "Database\\Factories\\Pharaoh\\Permission\\Models\\": "database/factories/"
     }
   },
   "autoload-dev": {
