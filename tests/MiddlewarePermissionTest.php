@@ -41,6 +41,44 @@ class MiddlewarePermissionTest extends BaseTestCase
     {
         parent::setUp();
 
+        // permission config 設定
+        config()->set(
+            [
+                'permission' => [
+                    [
+                        'group_func_key' => 10,
+                        'menu' => [
+                            [
+                                'func_key' => 1001,
+                                'open' => true,
+                            ],
+                            [
+                                'func_key' => 1002,
+                                'open' => true,
+                            ],
+                            [
+                                'func_key' => 1003,
+                                'open' => true,
+                            ],
+                        ],
+                    ],
+                    [
+                        'group_func_key' => 11,
+                        'menu' => [
+                            [
+                                'func_key' => 1101,
+                                'open' => true,
+                            ],
+                            [
+                                'func_key' => 1102,
+                                'open' => false,
+                            ],
+                        ],
+                    ]
+                ]
+            ]
+        );
+
         $this->user = new User();
         $this->user->id = 1;
 
@@ -55,8 +93,8 @@ class MiddlewarePermissionTest extends BaseTestCase
                 ]
             );
 
-        foreach ([1101, 1102, 1103] as $permissionKey) {
-            $permissions[] = PermissionModel::factory()->create(
+        foreach ([1001, 1002, 1003] as $permissionKey) {
+            PermissionModel::factory()->create(
                 [
                     'group_id' => $group['id'],
                     'permission_key' => $permissionKey
@@ -86,9 +124,13 @@ class MiddlewarePermissionTest extends BaseTestCase
     public function testMiddlewareWithOnePermissionKey()
     {
         // Act
-        $response = $this->middleware->handle($this->request, function () {
-            return response()->json(['code' => 200001], 200);
-        }, 1101);
+        $response = $this->middleware->handle(
+            $this->request,
+            function () {
+                return response()->json(['code' => 200001], 200);
+            },
+            1001
+        );
 
         $responseData = json_decode($response->getContent(), true);
 
@@ -105,9 +147,15 @@ class MiddlewarePermissionTest extends BaseTestCase
     public function testMiddlewareWithMultiplePermissionKey()
     {
         // Act
-        $response = $this->middleware->handle($this->request, function () {
-            return response()->json(['code' => 200001], 200);
-        }, 1101, 1102, 1103);
+        $response = $this->middleware->handle(
+            $this->request,
+            function () {
+                return response()->json(['code' => 200001], 200);
+            },
+            1001,
+            1002,
+            1003
+        );
 
         $responseData = json_decode($response->getContent(), true);
 
@@ -119,12 +167,16 @@ class MiddlewarePermissionTest extends BaseTestCase
     /**
      * 測試檢查 User 沒有該組 permissionKey
      */
-    public function testMiddlewareWithNonePermissionKey()
+    public function testMiddlewareWithoutPermissionKey()
     {
         // Act
-        $response = $this->middleware->handle($this->request, function () {
-            return response()->json(['code' => 200001], 200);
-        }, 1104);
+        $response = $this->middleware->handle(
+            $this->request,
+            function () {
+                return response()->json(['code' => 200001], 200);
+            },
+            1101
+        );
 
         $responseData = json_decode($response->getContent(), true);
 
@@ -133,5 +185,28 @@ class MiddlewarePermissionTest extends BaseTestCase
         $error = Arr::get($responseData, 'error');
         $this->assertEquals(403001, $code);
         $this->assertEquals('無該功能權限', $error);
+    }
+
+    /**
+     * 測試檢查 Permission Config func_key open = false
+     */
+    public function testMiddlewareFuncKeyIsNotOpen()
+    {
+        // Act
+        $response = $this->middleware->handle(
+            $this->request,
+            function () {
+                return response()->json(['code' => 200001], 200);
+            },
+            1102
+        );
+
+        $responseData = json_decode($response->getContent(), true);
+
+        // Assert
+        $code = Arr::get($responseData, 'code');
+        $error = Arr::get($responseData, 'error');
+        $this->assertEquals(403001, $code);
+        $this->assertEquals('該權限未開啟', $error);
     }
 }
