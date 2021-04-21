@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.8](https://github.com/castion2293/permission/compare/v1.0.7...v1.0.8) (2021-04-21)
+
+
+### Bug Fixes
+
+* 增加permission config至middleware中([@nick](https://github.com/nick)) ([90f8b02](https://github.com/castion2293/permission/commit/90f8b02941eb4591875ded53578691511fc9a106))
+
 ### [1.0.7](https://github.com/castion2293/permission/compare/v1.0.6...v1.0.7) (2021-04-21)
 
 
