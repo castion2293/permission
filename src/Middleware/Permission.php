@@ -29,9 +29,15 @@ class Permission
 
         $userPermissions = $user->getPermissions();
 
-        foreach($permissionKeys as $permissionKey) {
+        foreach ($permissionKeys as $permissionKey) {
             if (!in_array(intval($permissionKey), $userPermissions)) {
-                return response('Forbidden.', 403);
+                return response()->json(
+                    [
+                        'code' => 403001,
+                        'error' => '無該功能權限'
+                    ],
+                    403
+                );
             }
         }
 

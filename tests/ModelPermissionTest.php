@@ -13,6 +13,11 @@ class ModelPermissionTest extends BaseTestCase
 {
     use DatabaseMigrations;
 
+    /**
+     * User Model
+     *
+     * @var Model|User
+     */
     protected Model $user;
 
     public function setUp(): void
