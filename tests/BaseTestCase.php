@@ -137,6 +137,40 @@ class BaseTestCase extends TestCase
         ]);
 
         $app['config']->set('database.default', 'testing');
+
+        // permission config 設定
+        $app['config']->set('permission.items', [
+            [
+                'group_func_key' => 10,
+                'menu' => [
+                    [
+                        'func_key' => 1001,
+                        'open' => true,
+                    ],
+                    [
+                        'func_key' => 1002,
+                        'open' => true,
+                    ],
+                    [
+                        'func_key' => 1003,
+                        'open' => true,
+                    ],
+                ]
+            ],
+            [
+                'group_func_key' => 11,
+                'menu' => [
+                    [
+                        'func_key' => 1101,
+                        'open' => true,
+                    ],
+                    [
+                        'func_key' => 1102,
+                        'open' => false,
+                    ],
+                ],
+            ]
+        ]);
     }
 
     /**

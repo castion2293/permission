@@ -10,6 +10,8 @@ class Permission extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      * 覆寫序列化方法 toArray()時使用
      *

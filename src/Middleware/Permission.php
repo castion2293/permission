@@ -27,7 +27,7 @@ class Permission
             throw new \Exception('沒有認證後的管理者Model');
         }
 
-        $permissionSettingsCollection = collect(config('permission'))->pluck('menu')
+        $permissionSettingsCollection = collect(config('permission.items'))->pluck('menu')
             ->flatten(1);
 
         $userPermissions = $user->getPermissions();

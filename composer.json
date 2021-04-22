@@ -33,10 +33,7 @@
     "laravel": {
       "providers": [
         "Pharaoh\\Permission\\PermissionServiceProvider"
-      ],
-      "aliases": {
-        "Permission": "Pharaoh\\Permission\\Facades\\Permission"
-      }
+      ]
     }
   }
 }

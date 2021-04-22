@@ -2,8 +2,8 @@
 
 namespace Pharaoh\Permission;
 
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
+use Pharaoh\Permission\Commands\UpdateRootGroupPermissionCommand;
 
 class PermissionServiceProvider extends ServiceProvider
 {
@@ -23,13 +23,16 @@ class PermissionServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/permission.php', 'permission');
 
         $this->publishes([__DIR__ . '/../config/permission.php' => config_path('permission')], 'permission-config');
+
+        $this->commands(
+            [
+                UpdateRootGroupPermissionCommand::class
+            ]
+        );
     }
 
     public function register()
     {
         parent::register();
-
-        $loader = AliasLoader::getInstance();
-        $loader->alias('permission', 'Pharaoh\Permission\Permission');
     }
 }
