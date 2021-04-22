@@ -22,6 +22,8 @@ php artisan vendor:publish --tag=permission-config
 php artisan vendor:publish --tag=permission-database
 ```
 
+**必須先至 config/permission.php 設定權限內容**
+
 ## 使用方法
 
 ### 使用 Trait:
