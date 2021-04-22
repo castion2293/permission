@@ -50,23 +50,12 @@ class UpdateRootGroupPermissionCommand extends Command
 
         DB::transaction(
             function () use ($rootGroup) {
-                $rootGroupId = data_get($rootGroup, 'id');
-
-                // 刪除原本的權限
-                Permission::where('group_id', $rootGroupId)->delete();
-
-                // 新增所有權限
-                $permissions = collect(config('permission.items'))->pluck('menu')
+                $permissionKeys = collect(config('permission.items'))->pluck('menu')
                     ->flatten(1)
-                    ->map(function ($permissionKey) use ($rootGroupId) {
-                        return [
-                            'group_id' => $rootGroupId,
-                            'permission_key' => Arr::get($permissionKey, 'func_key')
-                        ];
-                    })
+                    ->pluck('func_key')
                     ->toArray();
 
-                Permission::insert($permissions);
+                $rootGroup->addPermissions($permissionKeys);
             }
         );
 

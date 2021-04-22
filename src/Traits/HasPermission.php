@@ -37,4 +37,12 @@ trait HasPermission
         $this->morphToMany(Group::class, 'groupable')
             ->sync($groupId);
     }
+
+    /**
+     * 獲取所屬權限群組
+     */
+    public function belongGroup()
+    {
+        return $this->morphToMany(Group::class, 'groupable')->first();
+    }
 }

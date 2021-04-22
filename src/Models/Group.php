@@ -27,4 +27,28 @@ class Group extends Model
     {
         return $this->hasMany(Permission::class, 'group_id', 'id');
     }
+
+    /**
+     * 更新管理群組權限
+     *
+     * @param array $permissions
+     */
+    public function addPermissions(array $permissions)
+    {
+        // 刪除該群組舊有權限
+        $this->permissions()->delete();
+
+        $permissionModels = collect($permissions)->map(
+            function ($permissionKey) {
+                return new Permission(
+                    [
+                        'group_id' => $this->id,
+                        'permission_key' => $permissionKey
+                    ]
+                );
+            }
+        );
+
+        $this->permissions()->saveMany($permissionModels);
+    }
 }
