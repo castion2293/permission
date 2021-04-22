@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.15](https://github.com/castion2293/permission/compare/v1.0.14...v1.0.15) (2021-04-22)
+
+
+### Bug Fixes
+
+* 修改README.md([@nick](https://github.com/nick)) ([8290d12](https://github.com/castion2293/permission/commit/8290d12ccece56660b07b6e77b8075e15cc47d7b))
+
 ### [1.0.14](https://github.com/castion2293/permission/compare/v1.0.13...v1.0.14) (2021-04-22)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "permission",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "權限管理器",
   "main": "index.js",
   "directories": {
