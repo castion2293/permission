@@ -12,6 +12,11 @@
 composer require thoth-pharaoh/permission
 ```
 
+Migrate 資料表
+```bash
+php artisan migrate
+```
+
 匯出 Config
 ```bash
 php artisan vendor:publish --tag=permission-config
