@@ -3,6 +3,7 @@
 namespace Pharaoh\Permission\Middleware;
 
 use Closure;
+use Pharaoh\Permission\Exceptions\PermissionException;
 
 class Permission
 {
@@ -39,24 +40,12 @@ class Permission
                 ->isNotEmpty();
 
             if (!$isFuncKeyOpen) {
-                return response()->json(
-                    [
-                        'code' => 403001,
-                        'error' => '該權限未開啟'
-                    ],
-                    403
-                );
+                throw new PermissionException('Permission is not open');
             }
 
-            // 檢查 user 有無權限
+            // 檢查 user 有無權限g
             if (!in_array(intval($permissionKey), $userPermissions)) {
-                return response()->json(
-                    [
-                        'code' => 403001,
-                        'error' => '無該功能權限'
-                    ],
-                    403
-                );
+                throw new PermissionException('Does not has permission');
             }
         }
 
