@@ -40,12 +40,12 @@ class Permission
                 ->isNotEmpty();
 
             if (!$isFuncKeyOpen) {
-                throw new PermissionException('Permission is not open');
+                throw new PermissionException("{$permissionKey} permission is not open");
             }
 
             // 檢查 user 有無權限g
             if (!in_array(intval($permissionKey), $userPermissions)) {
-                throw new PermissionException('Does not has permission');
+                throw new PermissionException("Does not has {$permissionKey} permission");
             }
         }
 
