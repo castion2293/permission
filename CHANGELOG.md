@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.20](https://github.com/castion2293/permission/compare/v1.0.19...v1.0.20) (2021-05-10)
+
+
+### Bug Fixes
+
+* 增加group model 反查關聯model資料readME([@nick](https://github.com/nick)) ([2e6d424](https://github.com/castion2293/permission/commit/2e6d424455369922a71f3c4671b3c8326c3ba371))
+
 ### [1.0.19](https://github.com/castion2293/permission/compare/v1.0.18...v1.0.19) (2021-05-04)
 
 
