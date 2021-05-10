@@ -73,6 +73,11 @@ $group->addPermissions($permissionKeys);
 
 >  $permissionKeys 代碼以 config.permission.php 中 items 內定義為主
 
+使用 deleteGroup 方法刪除該管理群組及對應權限
+```bash
+$group->deleteGroup();
+```
+
 <br/>
 
 ### 使用 Middleware:

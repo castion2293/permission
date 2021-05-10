@@ -51,4 +51,18 @@ class Group extends Model
 
         $this->permissions()->saveMany($permissionModels);
     }
+
+    /**
+     * 刪除 管理群組
+     *
+     * @return bool|void|null
+     */
+    public function deleteGroup()
+    {
+        // 刪除該群組舊有權限
+        $this->permissions()->delete();
+
+        // 刪除該管理群組
+        $this->delete();
+    }
 }

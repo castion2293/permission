@@ -248,4 +248,42 @@ class ModelPermissionTest extends BaseTestCase
         // Assert
         $this->assertNull($belongGroup);
     }
+
+    /**
+     * 測試 刪除 Group
+     */
+    public function testDeleteGroup()
+    {
+        // Arrange
+        $group = Group::factory()->create();
+
+        $permissionKeys = [1101, 1102, 1103];
+        $Permissions = [];
+        foreach ($permissionKeys as $permissionKey) {
+            $Permissions[] = Permission::factory()->create(
+                [
+                    'group_id' => data_get($group, 'id'),
+                    'permission_key' => $permissionKey
+                ]
+            )->toArray();
+        }
+
+
+        // Act
+        $group->deleteGroup();
+
+        // Assert
+        $this->assertDatabaseMissing(
+            'groups',
+            [
+                'id' => $group['id']
+            ]
+        );
+
+        foreach ($Permissions as $permission) {
+            $this->assertDatabaseMissing('permissions', [
+                'id' => $permission['id']
+            ]);
+        }
+    }
 }
