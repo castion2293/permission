@@ -101,6 +101,22 @@ Route::middleware(['auth:user', 'permission:1102,1103,1104'])->get('/user', 'Pos
 
 <br/>
 
+### 需要 group model 反查關聯的 model 資料:
+動態綁定 group 多對多 多行關聯
+
+AppServiceProvider.php
+```bash
+public function boot()
+{
+    // 動態綁定 groups <-> users 多對多 多型關聯
+    Group::resolveRelationUsing('users', function ($groupModel) {
+        return $groupModel->morphedByMany(User::class, 'groupable');
+    });
+}
+```
+
+<br/>
+
 ### 使用 Artisan Command 新增 root group 所有權限:
 
 ```bash
