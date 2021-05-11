@@ -6,6 +6,11 @@ use Pharaoh\Permission\Models\Group;
 
 trait HasPermission
 {
+    public function groups()
+    {
+        return $this->morphToMany(Group::class, 'groupable');
+    }
+
     /**
      * 獲取所有管理權限
      *
@@ -43,6 +48,6 @@ trait HasPermission
      */
     public function belongGroup()
     {
-        return $this->morphToMany(Group::class, 'groupable')->first();
+        return $this->groups()->first();
     }
 }
