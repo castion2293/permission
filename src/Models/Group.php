@@ -52,6 +52,14 @@ class Group extends Model
         $this->permissions()->saveMany($permissionModels);
     }
 
+    /** 獲取管理群組的所有權限
+     * @return array
+     */
+    public function getPermissions(): array
+    {
+        return $this->permissions()->select('permission_key')->get()->pluck('permission_key')->toArray();
+    }
+
     /**
      * 刪除 管理群組
      *

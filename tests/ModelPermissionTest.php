@@ -214,6 +214,32 @@ class ModelPermissionTest extends BaseTestCase
     }
 
     /**
+     * 測試 管理群組 獲取 所有權限
+     */
+    public function testGroupGetPermission()
+    {
+        // Arrange
+        $group = Group::factory()->create();
+
+        $permissionKeys = [1101, 1102, 1103];
+        $permissions = [];
+        foreach ($permissionKeys as $permissionKey) {
+            $permissions[] = Permission::factory()->create(
+                [
+                    'group_id' => data_get($group, 'id'),
+                    'permission_key' => $permissionKey
+                ]
+            )->toArray();
+        }
+
+        // Act
+        $groupPermissions = $group->getPermissions();
+
+        // Assert
+        $this->assertSame($permissionKeys, $groupPermissions);
+    }
+
+    /**
      * 測試 User model 獲取所屬群組
      */
     public function testUserBelongGroup()

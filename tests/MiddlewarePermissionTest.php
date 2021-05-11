@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Pharaoh\Permission\Exceptions\PermissionException;
 use Pharaoh\Permission\Middleware\Permission;
 use Pharaoh\Permission\Models\Group;
 use Pharaoh\Permission\Tests\Models\User;
@@ -131,22 +132,21 @@ class MiddlewarePermissionTest extends BaseTestCase
      */
     public function testMiddlewareWithoutPermissionKey()
     {
+        // Arrange
+        $permissionKey = 1101;
+
+        // Except
+        $this->expectException(PermissionException::class);
+        $this->expectErrorMessage("Does not has {$permissionKey} permission");
+
         // Act
-        $response = $this->middleware->handle(
+        $this->middleware->handle(
             $this->request,
             function () {
                 return response()->json(['code' => 200001], 200);
             },
-            1101
+            $permissionKey
         );
-
-        $responseData = json_decode($response->getContent(), true);
-
-        // Assert
-        $code = Arr::get($responseData, 'code');
-        $error = Arr::get($responseData, 'error');
-        $this->assertEquals(403001, $code);
-        $this->assertEquals('無該功能權限', $error);
     }
 
     /**
@@ -154,21 +154,20 @@ class MiddlewarePermissionTest extends BaseTestCase
      */
     public function testMiddlewareFuncKeyIsNotOpen()
     {
+        // Arrange
+        $permissionKey = 1102;
+
+        // Expect
+        $this->expectException(PermissionException::class);
+        $this->expectErrorMessage("{$permissionKey} permission is not open");
+
         // Act
-        $response = $this->middleware->handle(
+        $this->middleware->handle(
             $this->request,
             function () {
                 return response()->json(['code' => 200001], 200);
             },
-            1102
+            $permissionKey
         );
-
-        $responseData = json_decode($response->getContent(), true);
-
-        // Assert
-        $code = Arr::get($responseData, 'code');
-        $error = Arr::get($responseData, 'error');
-        $this->assertEquals(403001, $code);
-        $this->assertEquals('該權限未開啟', $error);
     }
 }
