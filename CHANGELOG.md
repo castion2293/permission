@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.22](https://github.com/castion2293/permission/compare/v1.0.21...v1.0.22) (2021-05-11)
+
+
+### Bug Fixes
+
+* 增加getPermissions group 方法([@nick](https://github.com/nick)) ([b2da030](https://github.com/castion2293/permission/commit/b2da030991ccdc7b89e4a36ba7bf189f9493898a))
+
 ### [1.0.21](https://github.com/castion2293/permission/compare/v1.0.20...v1.0.21) (2021-05-10)
 
 
