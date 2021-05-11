@@ -62,6 +62,11 @@ $user->belongGroup();
 $user->getPermissions();
 ```
 
+使用 getPermissions 方法取得該群組的所有管理權限
+```bash
+$group->getPermissions();
+```
+
 使用 addPermissions 方法更新該管理群組的權限
 ```bash
 $group->addPermissions($permissionKeys);
