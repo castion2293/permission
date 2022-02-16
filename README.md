@@ -6,6 +6,13 @@
 
 ![alt text](diagram.png "Title")
 
+## 版本匹配
+
+| Laravel          | package               |
+| ----------------- |:----------------------- |
+| 8.X       | 1.X   |
+| 9.X       | 2.X   |
+
 ## 安裝
 你可以使用 composer 做安裝
 ```bash
