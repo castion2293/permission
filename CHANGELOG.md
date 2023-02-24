@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/castion2293/permission/compare/v2.0.0...v2.0.1) (2023-02-24)
+
+
+### Bug Fixes
+
+* remove laravel version constrain(@Zhang) ([27ecee6](https://github.com/castion2293/permission/commit/27ecee61b53408ddc8691fbd5bd16c17cc930341))
+
 ## [2.0.0](https://github.com/castion2293/permission/compare/v1.0.24...v2.0.0) (2022-02-16)
 
 
